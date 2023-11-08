@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.js"
+        integrity="sha512-BbVEDjbqdN3Eow8+empLMrJlxXRj5nEitiCAK5A1pUr66+jLVejo3PmjIaucRnjlB0P9R3rBUs3g5jXc8ti+fQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"
+        integrity="sha512-iphNRh6dPbeuPGIrQbCdbBF/qcqadKWLa35YPVfMZMHBSI6PLJh1om2xCTWhpVpmUyb4IvVS9iYnnYMkleVXLA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
+    <style>
+        .numberbutton {
+            border: none;
+
+
+
+
+            color: aliceblue;
+            margin-left: 30px;
+            margin-right: 40px;
+            width: 30%;
+            text-align: center;
+            text-decoration-color: aliceblue;
+        }
+
+        .box {
+            align-items: center;
+            margin: 20px auto;
+
+        }
+
+        .row input {
+            font-size: 20px;
+            margin: 0;
+            padding: 5px;
+
+        }
+    </style>
+
+</head>
+
+<body>
+   <!-- <h2 class="text-center">Calculator</h2>--> 
+    <div class="container flex mx-auto items-center">
+        <div class="row numberbutton">
+            <input class="col-9 border-0 p-0" id="result"> </input>
+
+            <button class="col-3 bg-primary text-light" onclick="clr()"> AC</button>
+
+
+
+
+
+        </div>
+        <div class="row numberbutton">
+            <button class="col bg-dark text-light" onclick="dis('9')" onkeydown="myFunction(event)"> 9</button>
+            <button class="col   bg-dark text-light" onclick="dis('8')" onkeydown="myFunction(event)">8</button>
+            <button class="col   bg-dark text-light" onclick="dis('7')" onkeydown="myFunction(event)">7</button>
+            <button class="col   bg-secondary text-light" onclick="dis('+')" onkeydown="myFunction(event)">+</button>
+        </div>
+
+        <div class="row numberbutton">
+            <button class="col  bg-dark text-light " onclick="dis('4')" onkeydown="myFunction(event)"> 4</button>
+            <button class="col  bg-dark text-light" onclick="dis('5')" onkeydown="myFunction(event)">5</button>
+            <button class="col  bg-dark text-light" onclick="dis('6')" onkeydown="myFunction(event)">6</button>
+            <button class="col  bg-secondary text-light" onclick="dis('-')" onkeydown="myFunction(event)">-</button>
+        </div>
+        <div class="row numberbutton">
+            <button class="col  bg-dark text-light" onclick="dis('1')" onkeydown="myFunction(event)"> 1</button>
+            <button class="col  bg-dark text-light" onclick="dis('2')" onkeydown="myFunction(event)">2</button>
+            <button class="col  bg-dark text-light" onclick="dis('3')" onkeydown="myFunction(event)">3</button>
+            <button class="col  bg-secondary text-light" onclick="dis('/')" onkeydown="myFunction(event)">/</button>
+        </div>
+        <div class="row numberbutton">
+            <button class="col  bg-dark text-light" onclick="dis('.')" onkeydown="myFunction(event)"> .</button>
+            <button class="col  bg-dark text-light" onclick="dis('0')" onkeydown="myFunction(event)">0</button>
+            <button class="col  bg-dark text-light" onclick="solve()">=</button>
+            <button class="col  bg-secondary text-light" onclick="dis('*')" onkeydown="myFunction(event)">*</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        //for display value
+        function dis(val) {
+            document.getElementById("result").value += val
+        }
+
+
+        // calling events
+
+
+        function myFunction(event) {
+            if (event.key == '0' || event.key == '1'
+                || event.key == '2' || event.key == '3'
+                || event.key == '4' || event.key == '5'
+                || event.key == '6' || event.key == '7'
+                || event.key == '8' || event.key == '9'
+                || event.key == '+' || event.key == '-'
+                || event.key == '*' || event.key == '/')
+                document.getElementById("result").value += event.key;
+        }
+
+
+
+        var cal = document.getElementById("calcu");
+        cal.onkeyup = function (event) {
+            if (event.keyCode === 13) {
+                console.log("Enter");
+                let x = document.getElementById("result").value
+                console.log(x);
+                solve();
+            }
+        }
+
+        // Function that evaluates the digit and return result 
+        function solve() {
+            let x = document.getElementById("result").value
+            let y = math.evaluate(x)
+            document.getElementById("result").value = y
+        }
+
+        // Function that clear the display 
+        function clr() {
+            document.getElementById("result").value = ""
+        }
+
+
+
+    </script>
+</body>
+
+</html>
